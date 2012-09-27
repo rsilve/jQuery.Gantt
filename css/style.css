@@ -42,7 +42,7 @@
     z-index: 20;
 }
 
-.fn-gantt .row {
+.fn-gantt .gantt-row {
     float: left;
     height: 24px;
     line-height: 24px;
@@ -59,10 +59,10 @@
     overflow: hidden;
 }
 
-.fn-gantt .leftPanel .row0 {
+.fn-gantt .leftPanel .gantt-row0 {
     border-top: 1px solid #DDD;
 }
-.fn-gantt .leftPanel .name, .fn-gantt .leftPanel .desc {
+.fn-gantt .leftPanel .gantt-name, .fn-gantt .leftPanel .gantt-desc {
     float: left;
     height: 23px;
     margin: 0;
@@ -70,12 +70,12 @@
     background-color: #f6f6f6;
 }
 
-.fn-gantt .leftPanel .name {
+.fn-gantt .leftPanel .gantt-name {
     width: 110px;
     font-weight: bold;
 }
 
-.fn-gantt .leftPanel .desc {
+.fn-gantt .leftPanel .gantt-desc {
     width: 115px;
 }
 
@@ -229,7 +229,7 @@
 
 /* === BOTTOM NAVIGATION === */
 
-.fn-gantt .bottom {
+.fn-gantt .gantt-bottom {
     clear: both;
     background-color: #f6f6f6;
     width: 100%;
@@ -412,7 +412,7 @@
     font-weight: bold;
 }
 
-.row:after {
+.gantt-row:after {
     clear: both;
 }
 

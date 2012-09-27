@@ -272,19 +272,19 @@
             leftPanel: function (element) {
                 /* Left panel */
                 var ganttLeftPanel = $('<div class="leftPanel"/>')
-                .append($('<div class="row spacer"/>')
+                .append($('<div class="gantt-row gantt-spacer"/>')
                     .css("height", tools.getCellSize() * element.headerRows + "px")
                     .css("width", "100%"));
 
                 var entries = [];
                 $.each(element.data, function (i, entry) {
                     if (i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
-                        entries.push('<div class="row name row' + i + (entry.desc ? '' : ' fn-wide') + '" id="rowheader' + i + '" offset="' + i % settings.itemsPerPage * tools.getCellSize() + '">');
+                        entries.push('<div class="gantt-row gantt-name gantt-row' + i + (entry.desc ? '' : ' fn-wide') + '" id="rowheader' + i + '" offset="' + i % settings.itemsPerPage * tools.getCellSize() + '">');
                         entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' + entry.name + '</span>');
                         entries.push('</div>');
 
                         if (entry.desc) {
-                            entries.push('<div class="row desc row' + i + ' " id="RowdId_' + i + '" data-id="' + entry.id + '">');
+                            entries.push('<div class="gantt-row gantt-desc gantt-row' + i + ' " id="RowdId_' + i + '" data-id="' + entry.id + '">');
                             entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' + entry.desc + '</span>');
                             entries.push('</div>');
                         }
@@ -371,10 +371,10 @@
                 var dowClass = [" sn", " wd", " wd", " wd", " wd", " wd", " sa"];
                 var gridDowClass = [" sn", "", "", "", "", "", " sa"];
 
-                var yearArr = ['<div class="row"/>'];
+                var yearArr = ['<div class="gantt-row"/>'];
                 var daysInYear = 0;
 
-                var monthArr = ['<div class="row"/>'];
+                var monthArr = ['<div class="gantt-row"/>'];
                 var daysInMonth = 0;
 
                 var dayArr = [];
@@ -408,7 +408,7 @@
                             var rfy = rday.getFullYear();
                             if (rfy !== year) {
                                 yearArr.push(
-                                    ('<div class="row header year" style="width: '
+                                    ('<div class="gantt-row gantt-header year" style="width: '
                                         + tools.getCellSize() * daysInYear
                                         + 'px;"><div class="fn-label">'
                                         + year
@@ -425,7 +425,7 @@
                             var rm = rday.getMonth();
                             if (rm !== month) {
                                 monthArr.push(
-                                    ('<div class="row header month" style="width: '
+                                    ('<div class="gantt-row gantt-header month" style="width: '
                                         + tools.getCellSize() * daysInMonth + 'px"><div class="fn-label">'
                                         + settings.months[month]
                                         + '</div></div>'));
@@ -449,10 +449,10 @@
 
                                 var day_class2 = (today - day === 0) ? ' today' : (holidays.indexOf(getTime) > -1) ? "holiday" : dowClass[getDay];
 
-                                dayArr.push('<div class="row date ' + day_class2 + '" '
+                                dayArr.push('<div class="gantt-row date ' + day_class2 + '" '
                                     + ' style="width: ' + tools.getCellSize() * hoursInDay + 'px;"> '
                                     + ' <div class="fn-label">' + day.getDate() + '</div></div>');
-                                dowArr.push('<div class="row day ' + day_class2 + '" '
+                                dowArr.push('<div class="gantt-row day ' + day_class2 + '" '
                                     + ' style="width: ' + tools.getCellSize() * hoursInDay + 'px;"> '
                                     + ' <div class="fn-label">' + settings.dow[getDay] + '</div></div>');
 
@@ -461,7 +461,7 @@
                             }
                             hoursInDay++;
 
-                            horArr.push('<div class="row day '
+                            horArr.push('<div class="gantt-row day '
                                 + day_class
                                 + '" id="dh-'
                                 + rday.getTime()
@@ -475,7 +475,7 @@
                          */
 
                         yearArr.push(
-                            '<div class="row header year" style="width: '
+                            '<div class="gantt-row gantt-header year" style="width: '
                             + tools.getCellSize() * daysInYear + 'px;"><div class="fn-label">'
                             + year
                             + '</div></div>');
@@ -483,7 +483,7 @@
                          * Last month
                          */
                         monthArr.push(
-                            '<div class="row header month" style="width: '
+                            '<div class="gantt-row gantt-header month" style="width: '
                             + tools.getCellSize() * daysInMonth + 'px"><div class="fn-label">'
                             + settings.months[month]
                             + '</div></div>');
@@ -494,11 +494,11 @@
                             day_class = "holiday";
                         }
 
-                        dayArr.push('<div class="row date ' + day_class + '" '
+                        dayArr.push('<div class="gantt-row date ' + day_class + '" '
                             + ' style="width: ' + tools.getCellSize() * hoursInDay + 'px;"> '
                             + ' <div class="fn-label">' + day.getDate() + '</div></div>');
 
-                        dowArr.push('<div class="row day ' + day_class + '" '
+                        dowArr.push('<div class="gantt-row day ' + day_class + '" '
                             + ' style="width: ' + tools.getCellSize() * hoursInDay + 'px;"> '
                             + ' <div class="fn-label">' + settings.dow[day.getDay()] + '</div></div>');
 
@@ -510,17 +510,17 @@
 
                         dataPanel.append(yearArr.join(""));
                         dataPanel.append(monthArr.join(""));
-                        dataPanel.append($('<div class="row"/>').html(dayArr.join("")));
-                        dataPanel.append($('<div class="row"/>').html(dowArr.join("")));
-                        dataPanel.append($('<div class="row"/>').html(horArr.join("")));
+                        dataPanel.append($('<div class="gantt-row"/>').html(dayArr.join("")));
+                        dataPanel.append($('<div class="gantt-row"/>').html(dowArr.join("")));
+                        dataPanel.append($('<div class="gantt-row"/>').html(horArr.join("")));
 
                         break;
 
                     // weeks ///////////////////////////////////////////////////////////////////////////////////////// 
                     case "weeks":
                         range = tools.parseWeeksRange(element.dateStart, element.dateEnd);
-                        yearArr = ['<div class="row"/>'];
-                        monthArr = ['<div class="row"/>'];
+                        yearArr = ['<div class="gantt-row"/>'];
+                        monthArr = ['<div class="gantt-row"/>'];
                         var year = range[0].getFullYear();
                         var month = range[0].getMonth();
                         var day = range[0];
@@ -532,7 +532,7 @@
                          */
                             if (rday.getFullYear() !== year) {
                                 yearArr.push(
-                                    ('<div class="row header year" style="width: '
+                                    ('<div class="gantt-row gantt-header year" style="width: '
                                         + tools.getCellSize() * daysInYear
                                         + 'px;"><div class="fn-label">'
                                         + year
@@ -547,7 +547,7 @@
                          */
                             if (rday.getMonth() !== month) {
                                 monthArr.push(
-                                    ('<div class="row header month" style="width:'
+                                    ('<div class="gantt-row gantt-header month" style="width:'
                                         + tools.getCellSize() * daysInMonth
                                         + 'px;"><div class="fn-label">'
                                         + settings.months[month]
@@ -559,7 +559,7 @@
                             /*
                          * Fill weeks
                          */
-                            dayArr.push('<div class="row day wd" '
+                            dayArr.push('<div class="gantt-row day wd" '
                                 + ' id="' + rday.getWeekId() + '" offset="' + i * tools.getCellSize() + '" repdate="' + rday.genRepDate() + '"> '
                                 + ' <div class="fn-label">' + rday.getWeekOfYear() + '</div></div>');
                         }
@@ -568,7 +568,7 @@
                      * Last year
                      */
                         yearArr.push(
-                            '<div class="row header year" style="width: '
+                            '<div class="gantt-row gantt-header year" style="width: '
                             + tools.getCellSize() * daysInYear + 'px;"><div class="fn-label">'
                             + year
                             + '</div></div>');
@@ -576,7 +576,7 @@
                      * Last month
                      */
                         monthArr.push(
-                            '<div class="row header month" style="width: '
+                            '<div class="gantt-row gantt-header month" style="width: '
                             + tools.getCellSize() * daysInMonth + 'px"><div class="fn-label">'
                             + settings.months[month]
                             + '</div></div>');
@@ -604,7 +604,7 @@
                      */
                             if (rday.getFullYear() !== year) {
                                 yearArr.push(
-                                    ('<div class="row header year" style="width: '
+                                    ('<div class="gantt-row gantt-header year" style="width: '
                                         + tools.getCellSize() * daysInYear
                                         + 'px;"><div class="fn-label">'
                                         + year
@@ -613,7 +613,7 @@
                                 daysInYear = 0;
                             }
                             daysInYear++;
-                            monthArr.push('<div class="row day wd" id="dh-' + tools.genId(rday.getTime()) + '" offset="' + i * tools.getCellSize() + '" repdate="' + rday.genRepDate() + '">' + (1 + rday.getMonth()) + '</div>');
+                            monthArr.push('<div class="gantt-row day wd" id="dh-' + tools.genId(rday.getTime()) + '" offset="' + i * tools.getCellSize() + '" repdate="' + rday.genRepDate() + '">' + (1 + rday.getMonth()) + '</div>');
 
 
 
@@ -623,7 +623,7 @@
                  * Last year
                  */
                         yearArr.push(
-                            '<div class="row header year" style="width: '
+                            '<div class="gantt-row gantt-header year" style="width: '
                             + tools.getCellSize() * daysInYear + 'px;"><div class="fn-label">'
                             + year
                             + '</div></div>');
@@ -631,7 +631,7 @@
                  * Last month
                  */
                         monthArr.push(
-                            '<div class="row header month" style="width: '
+                            '<div class="gantt-row gantt-header month" style="width: '
                             + tools.getCellSize() * daysInMonth + 'px">"<div class="fn-label">'
                             + settings.months[month]
                             + '</div></div>');
@@ -643,8 +643,8 @@
                  */
                         dataPanel.append(yearArr.join(""));
                         dataPanel.append(monthArr.join(""));
-                        dataPanel.append($('<div class="row"/>').html(dayArr.join("")));
-                        dataPanel.append($('<div class="row"/>').html(dowArr.join("")));
+                        dataPanel.append($('<div class="gantt-row"/>').html(dayArr.join("")));
+                        dataPanel.append($('<div class="gantt-row"/>').html(dowArr.join("")));
 
 
                         break;
@@ -663,7 +663,7 @@
                  */
                             if (rday.getFullYear() !== year) {
                                 yearArr.push(
-                                    ('<div class="row header year" style="width:'
+                                    ('<div class="gantt-row gantt-header year" style="width:'
                                         + tools.getCellSize() * daysInYear
                                         + 'px;"><div class="fn-label">'
                                         + year
@@ -678,7 +678,7 @@
                  */
                             if (rday.getMonth() !== month) {
                                 monthArr.push(
-                                    ('<div class="row header month" style="width:'
+                                    ('<div class="gantt-row gantt-header month" style="width:'
                                         + tools.getCellSize() * daysInMonth
                                         + 'px;"><div class="fn-label">'
                                         + settings.months[month]
@@ -694,10 +694,10 @@
                                 day_class = "holiday";
                             }
 
-                            dayArr.push('<div class="row date ' + day_class + '" '
+                            dayArr.push('<div class="gantt-row date ' + day_class + '" '
                                 + ' id="dh-' + tools.genId(rday.getTime()) + '" offset="' + i * tools.getCellSize() + '" repdate="' + rday.genRepDate() + '> '
                                 + ' <div class="fn-label">' + rday.getDate() + '</div></div>');
-                            dowArr.push('<div class="row day ' + day_class + '" '
+                            dowArr.push('<div class="gantt-row day ' + day_class + '" '
                                 + ' id="dw-' + tools.genId(rday.getTime()) + '"  repdate="' + rday.genRepDate() + '"> '
                                 + ' <div class="fn-label">' + settings.dow[getDay] + '</div></div>');
                         } //for
@@ -706,7 +706,7 @@
              * Last year
              */
                         yearArr.push(
-                            '<div class="row header year" style="width: '
+                            '<div class="gantt-row gantt-header year" style="width: '
                             + tools.getCellSize() * daysInYear + 'px;"><div class="fn-label">'
                             + year
                             + '</div></div>');
@@ -714,7 +714,7 @@
              * Last month
              */
                         monthArr.push(
-                            '<div class="row header month" style="width: '
+                            '<div class="gantt-row gantt-header month" style="width: '
                             + tools.getCellSize() * daysInMonth + 'px"><div class="fn-label">'
                             + settings.months[month]
                             + '</div></div>');
@@ -726,8 +726,8 @@
              */
                         dataPanel.append(yearArr.join(""));
                         dataPanel.append(monthArr.join(""));
-                        dataPanel.append($('<div class="row"/>').html(dayArr.join("")));
-                        dataPanel.append($('<div class="row"/>').html(dowArr.join("")));
+                        dataPanel.append($('<div class="gantt-row"/>').html(dayArr.join("")));
+                        dataPanel.append($('<div class="gantt-row"/>').html(dowArr.join("")));
 
                         break;
                 }
@@ -908,7 +908,7 @@
                             core.zoomInOut(element, 1);
                         }));
                 }
-                return $('<div class="bottom"/>').append(ganttNavigate);
+                return $('<div class="gantt-bottom"/>').append(ganttNavigate);
             },
             createProgressBar: function (days, cls, desc, label, dataObj) {
                 var cellWidth = tools.getCellSize();
@@ -1071,7 +1071,7 @@
                                     datapanel.append(_bar);
                                     break;
                                 case "months":
-                                    range = tools.parseMonthsRange(element.dateStart, element.dateEnd);
+                                    var range = tools.parseMonthsRange(element.dateStart, element.dateEnd);
                                     
                                     var dtFrom = range[0];
                                     if (!entry.always) {
@@ -1123,14 +1123,14 @@
 
                                 // Days 
                                 default:
-                                    range = tools.parseDateRange(element.dateStart, element.dateEnd);
+                                    var range = tools.parseDateRange(element.dateStart, element.dateEnd);
 
-                                    var dtFrom = range[0];
+                                    var dFrom = tools.genId(range[0].getTime());
                                     if (!entry.always) {
                                         dFrom = tools.genId(tools.dateDeserialize(day.from).getTime());
                                     }   
                                     
-                                    var dtTo = range[range.length -1];
+                                    var dTo = tools.genId(range[range.length -1].getTime());
                                     if (!entry.always) {
                                         dTo = tools.genId(tools.dateDeserialize(day.to).getTime());
                                     }
@@ -1444,7 +1444,14 @@
                 var maxDate = null;
                 $.each(element.data, function (i, entry) {
                     $.each(entry.values, function (i, date) {
-                        maxDate = maxDate < tools.dateDeserialize(date.to) ? tools.dateDeserialize(date.to) : maxDate;
+                        if (!entry.always) {
+                            maxDate = maxDate < tools.dateDeserialize(date.to) ? tools.dateDeserialize(date.to) : maxDate;
+                        } else {
+                            maxDate = new Date();
+                            maxDate.setDate(31);
+                            maxDate.setMonth(12);
+                        }
+               
                     });
                 });
 
@@ -1475,7 +1482,13 @@
                 var minDate = null;
                 $.each(element.data, function (i, entry) {
                     $.each(entry.values, function (i, date) {
-                        minDate = minDate > tools.dateDeserialize(date.from) || minDate === null ? tools.dateDeserialize(date.from) : minDate;
+                        if (!entry.always) {
+                            minDate = minDate > tools.dateDeserialize(date.from) || minDate === null ? tools.dateDeserialize(date.from) : minDate;
+                        } else {
+                            minDate = new Date();
+                            minDate.setDate(1);
+                            minDate.setMonth(0);
+                        }
                     });
                 });
                 switch (settings.scale) {
@@ -1597,9 +1610,9 @@
             getCellSize: function () {
                 if (!tools._getCellSize) {
                     $("body").append(
-                        $('<div style="display: none; position: absolute;" class="fn-gantt" id="measureCellWidth"><div class="row"></div></div>')
+                        $('<div style="display: none; position: absolute;" class="fn-gantt" id="measureCellWidth"><div class="gantt-row"></div></div>')
                         );
-                    tools._getCellSize = $("#measureCellWidth .row").height();
+                    tools._getCellSize = $("#measureCellWidth .gantt-row").height();
                     $("#measureCellWidth").empty().remove();
                 }
                 return tools._getCellSize;
@@ -1619,7 +1632,7 @@
             getProgressBarMargin: function () {
                 if (!tools._getProgressBarMargin) {
                     $("body").append(
-                        $('<div style="display: none; position: absolute;" id="measureBarWidth" ><div class="fn-gantt"><div class="rightPanel"><div class="dataPanel"><div class="row day"><div class="bar" /></div></div></div></div></div>')
+                        $('<div style="display: none; position: absolute;" id="measureBarWidth" ><div class="fn-gantt"><div class="rightPanel"><div class="dataPanel"><div class="gantt-row day"><div class="bar" /></div></div></div></div></div>')
                         );
                     tools._getProgressBarMargin = parseInt($("#measureBarWidth .fn-gantt .rightPanel .day .bar").css("margin-left").replace("px", ""), 10);
                     tools._getProgressBarMargin += parseInt($("#measureBarWidth .fn-gantt .rightPanel .day .bar").css("margin-right").replace("px", ""), 10);
